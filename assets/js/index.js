@@ -1,4 +1,4 @@
-// Control presupuesto
+// Controller presupuesto
 var controlPresupuesto = (function(){
 
   
@@ -12,18 +12,18 @@ var controlPresupuesto = (function(){
   };
 
 
-  //calculo del porcentaje en los egresos, usando la función toFixed(2), como fue requerido
+  //calculo del porcentaje en los egresos
   Expense.prototype.calcPercentage = function(totalIncome){
     if(totalIncome > 0){
-      this.percentage = ((this.value / totalIncome) * 100);
-      this.prctg = percentage.toFixed(2);
+      this.percentage = Math.round((this.value / totalIncome) * 100);
+ 
     } else {
       this.percentage = -1;
     }
   };
 //funcion porcentaje
   Expense.prototype.getPercentage = function(){
-    return this.prctg;
+    return this.percentage;
   };
  
   //ingresos
@@ -209,7 +209,7 @@ var UIController = (function(){
         html = '<div class="item clearfix" id="inc-%id%"><div class="item__description">%descripcion%</div><div class="balance"><div class="item__value">%value%</div></div></div></div>';
       } else if(type === "exp"){
         element = DOMstrings.expensesContainer;
-        html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%descripcion%</div><div class="balance"><div class="item__value">%value%</div><div class="item__percentage">21%</div></button></div></div></div>'
+        html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%descripcion%</div><div class="balance"><div class="item__value">%value%</div><div class="item__percentage">%</div></button></div></div></div>'
       }
 
       // Reemplazando el placeholder text con los verdaderos datos
